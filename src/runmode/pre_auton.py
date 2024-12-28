@@ -30,5 +30,7 @@ def control():
     DrivetrainDevices.leftMotor.stop()
     DrivetrainDevices.rightMotor.stop()
 
+    DrivetrainDevices.imu.calibrate()
+
     intakeMotor.set_max_torque(100, PERCENT)
     intakeMotor.stop()
