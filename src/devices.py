@@ -10,24 +10,18 @@ brain = Brain()
 
 motorPorts = [Ports.PORT1, Ports.PORT2, Ports.PORT3, Ports.PORT5, Ports.PORT19, Ports.PORT20, Ports.PORT16]
 
-controller = {
-    "master": Controller(PRIMARY),
-    "partner": Controller(PARTNER)
-}
+class _controller:
+    master = Controller(PRIMARY)
+    partner = Controller(PARTNER)
+controller = _controller()
 
-DrivetrainDevices = {
-    "leftMotor": MotorGroup(Motor(Ports.PORT1, GearSetting.RATIO_18_1, False), 
-                                Motor(Ports.PORT2, GearSetting.RATIO_18_1, False)),
-    "rightMotor": MotorGroup(Motor(Ports.PORT3, GearSetting.RATIO_18_1, True), 
-                                Motor(Ports.PORT5, GearSetting.RATIO_18_1, True)),
-    "imu": Gyro(Ports.PORT15)
-}
-Drivetrain = DriveTrain(DrivetrainDevices["leftMotor"], DrivetrainDevices["rightMotor"],
-                            DRIVETRAIN.WHEEL_DIAMETER, 
-                            DRIVETRAIN.TRACK_WIDTH,
-                            DRIVETRAIN.WHEEL_BASE,
-                            DistanceUnits.IN,
-                            DRIVETRAIN.GEAR_RATIO)
+class _DrivetrainDevices:
+    leftMotor = MotorGroup(Motor(Ports.PORT1, GearSetting.RATIO_18_1, False), 
+                               Motor(Ports.PORT2, GearSetting.RATIO_18_1, False))
+    rightMotor = MotorGroup(Motor(Ports.PORT3, GearSetting.RATIO_18_1, True), 
+                               Motor(Ports.PORT5, GearSetting.RATIO_18_1, True))
+    imu = Gyro(Ports.PORT15)
+DrivetrainDevices = _DrivetrainDevices()
 
 intakeMotor = MotorGroup(Motor(Ports.PORT19, GearSetting.RATIO_18_1, True), 
                         Motor(Ports.PORT20, GearSetting.RATIO_18_1, True))

@@ -13,12 +13,12 @@ def arcade_drive(straight, turn):
   left = straight + turn * 0.7 # the 0.7 makes the turns less intense
   right = straight - turn * 0.7
 
-  DrivetrainDevices["leftMotor"].spin(FORWARD, left, PERCENT)
-  DrivetrainDevices["rightMotor"].spin(FORWARD, right, PERCENT)
+  DrivetrainDevices.leftMotor.spin(FORWARD, left, PERCENT)
+  DrivetrainDevices.rightMotor.spin(FORWARD, right, PERCENT)
 
 def cheesy_drive():  
-  straight = threshold(controller["master"].axis3.position())
-  turn = threshold(controller["master"].axis1.position())
+  straight = threshold(controller.master.axis3.position())
+  turn = threshold(controller.master.axis1.position())
 
   if abs(straight) <= turn:
     arcade_drive(0, turn)
@@ -32,10 +32,13 @@ def cheesy_drive():
     left /= mag;
     right /= mag;
 
-  DrivetrainDevices["leftMotor"].spin(FORWARD, left, PERCENT)
-  DrivetrainDevices["rightMotor"].spin(FORWARD, right, PERCENT)
+  DrivetrainDevices.leftMotor.spin(FORWARD, left, PERCENT)
+  DrivetrainDevices.rightMotor.spin(FORWARD, right, PERCENT)
 
 def control():
   while True:
     cheesy_drive()
     wait(20, MSEC)
+
+def position():
+  return (DrivetrainDevices.leftMotor.position(TURNS) + DrivetrainDevices.rightMotor.position(TURNS)) / 2
